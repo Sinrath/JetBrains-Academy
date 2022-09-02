@@ -1,0 +1,71 @@
+<h2>setTimeout and setInterval</h2>
+<html><body><p>When writing scripts with two lines, we assume that the browser will execute the second line after the first. However, some situations ask for a different approach: for example, what if you want to show an ad only after the user has spent 5 seconds on your website? Let's take a closer look at how to control the functions in situations like that.</p>
+<h5 id="settimeout">setTimeout</h5>
+<p>Imagine you have a shopping list, but you don't want to go to the store immediately. You plan to do it in an hour, after you have watched a movie. If we put it in programming terms, you have a function called "buy food" that you want to execute after 60 minutes.</p>
+<p>In the JavaScript world, we would say that you are <strong>"scheduling a call"</strong>: you have already written the code and want to launch it at a specific time.</p>
+<p>One of the methods to help with scheduling a call is <code class="language-javascript">setTimeout</code>. It doesn't run instantly: <code class="language-javascript">setTimeout</code> is executed only after a specific period of time. Look at the example for an advertising message that is showed after 5 seconds:</p>
+<pre><code class="language-javascript">setTimeout(function() {
+  console.log("Welcome to our website! You have a special discount today!");
+}, 5000)</code></pre>
+<p>Here is another way to write <code class="language-javascript">setTimeout</code>. As you see, we call a function named <em>welcome</em> instead of an anonymous function: </p>
+<pre><code class="language-javascript">function welcome(name) {
+  console.log(name + ", welcome to our website! You have a special discount today!");
+}
+let userWelcomeMessage = setTimeout(welcome, 5000, "Mary");</code></pre>
+<p>Let's look at the variables of the <code class="language-javascript">setTimeout</code> method:</p>
+<ul>
+<li> <code class="language-javascript">function() {console.log(`…`)}</code>: the function to call after the delay;</li>
+<li> <code class="language-javascript">5000</code>: the delay period in milliseconds (1000 ms = 1 second), that is, the time after which the function is executed.</li>
+<li> <code class="language-javascript">Mary</code>: an argument for the <em>welcome</em> function;</li>
+</ul>
+<p>The text "Mary" goes to the <em>welcome</em> function as the <em>name</em> variable, and we will see the message "Mary, welcome to our website! You have a special discount today!" in 5 seconds as a result. You can pass more than one argument to a function by adding additional variables to the <code class="language-javascript">setTimeout</code> method. </p>
+<h5 id="zero-delays-settimeout">Zero delays setTimeout</h5>
+<p>Let’s consider another case with the <code class="language-javascript">setTimeout</code> method. Here's our example:</p>
+<pre><code class="language-javascript">setTimeout(function() {
+  console.log("Welcome to our website!");
+}, 5000)</code></pre>
+<p>Now, what happens if we change the delay variable to zero or delete it?</p>
+<pre><code class="language-javascript">function welcome() {
+  console.log("Welcome to our website!");
+}
+
+setTimeout(welcome, 0)</code></pre>
+<p>The function will be executed immediately, without delay. However, you should remember that if another function is written after it, it will be executed first. Let's consider an example to better understand it: </p>
+<pre><code class="language-javascript">function welcome() {
+  console.log("Welcome to our website!");
+}
+
+setTimeout(welcome, 0)
+
+console.log("2nd of May");</code></pre>
+<p>The browser calls <code class="language-javascript">setTimeout</code> only after the function <code class="language-javascript">console.log</code> is executed. The <code class="language-javascript">welcome()</code> function is placed in the queue and launched after the current code is complete. As a result, the user will see "2nd of May" first and only then "Welcome to our website!".</p>
+<h5 id="setinterval">setInterval</h5>
+<p>Imagine you want to wake up at 8 a.m. every day. To do it, you add an alarm for a specific time and set it to repeat every 24 hours. In programming terms, you have a function called "alarm" and you want to execute it again in a certain interval.</p>
+<p>The method <code class="language-javascript">setInterval</code> does just that: it calls the function again and again after a specific time period.</p>
+<p>Here is an example:</p>
+<pre><code class="language-javascript">function alarm(time) {
+  console.log("Wake up! It’s " + time + " o'clock!");
+}
+
+setInterval(alarm, 3000, 8);</code></pre>
+<p>The user will see "Wake up! It's 8 o'clock!" in three seconds and then every three seconds. </p>
+<p>Like the <code class="language-javascript">setTimeout</code> method, <code class="language-javascript">setInterval</code> has similar variables:</p>
+<ul>
+<li>the function to be executed;</li>
+<li>an interval (in ms) in which function will be run every time;</li>
+<li>function arguments.</li>
+</ul>
+<h5 id="clearing-intervals">Clearing intervals</h5>
+<p>As you know, it's possible to run a function with a delay. Jack the programmer has done it 1000 times on the webpage to show different ads for a user, and the user's browser started to work very slowly. How can we help Jack?</p>
+<p>When you launch the timer, the browser keeps running the task forever and hence spends resources. To avoid it, we should stop timers that aren't needed. You run the timer with <code class="language-javascript">setTimeout</code>, and to break it, you should use <code class="language-javascript">clearTimeout</code>. </p>
+<p>In this case, you should know the id of the timer you want to stop. <code class="language-javascript">setTimeout</code> helps with that: it returns the identifier of the timer that had been created. Look at the following example:</p>
+<pre><code class="language-javascript">let timerId = setTimeout(...);
+
+clearTimeout(timerId);</code></pre>
+<p>If you want to break the timer made by <code class="language-javascript">setInterval</code>, you have to use <code class="language-javascript">clearInterval</code>:</p>
+<pre><code class="language-javascript">const intervalId = setInterval(alarm, 2000);
+
+clearInterval(intervalId);</code></pre>
+<p>Again: don't forget to stop all unnecessary timers, because otherwise, running all processes will take up significant computer resources.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p>In this topic, we have considered two methods for executing code with delay: <code class="language-javascript">setTimeout</code> and <code class="language-javascript">setInterval</code>. The <code class="language-javascript">setTimeout</code> method is used to launch code once, while <code class="language-javascript">setInterval</code> runs every time with a specific interval. You also know how to stop timers using <code class="language-javascript">clearTimeout</code> and <code class="language-javascript">clearInterval</code> methods so that the browser is not overwhelmed.</p></body></html>

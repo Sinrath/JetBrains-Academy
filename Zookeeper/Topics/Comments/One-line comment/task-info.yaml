@@ -1,0 +1,23 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: \\
+- text: //
+- text: // and \\
+- text: /* and */
+files:
+- name: main.js
+  visible: true
+  text: |+
+    // You can experiment here, it won’t be checked
+
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/8171#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Thu, 25 Aug 2022 10:21:52 UTC
+record: -1
+selected_options:
+- 1
+local_check: false
